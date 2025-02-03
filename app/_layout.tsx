@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
 import { Slot } from 'expo-router';
 import { tokenCache } from '@/utils/cache';
+import { Colors } from '@/constants/Colors';
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -12,7 +13,16 @@ if (!publishableKey) {
 }
 
 const InitialLayout = () => {
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: Colors.background },
+      }}
+    >
+      <Stack.Screen name='index' />
+    </Stack>
+  );
 };
 
 const RootLayout = () => {
@@ -24,3 +34,5 @@ const RootLayout = () => {
     </ClerkProvider>
   );
 };
+
+export default RootLayout;
