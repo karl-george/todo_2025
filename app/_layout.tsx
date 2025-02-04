@@ -14,31 +14,29 @@ if (!publishableKey) {
 }
 
 const InitialLayout = () => {
-  const { isLoaded, isSignedIn } = useAuth();
   const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
   const segments = useSegments();
-  const pathName = usePathname();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!isLoaded) {
-      return;
-    }
-
+    if (!isLoaded) return;
     const inAuthGroup = segments[0] === '(auth)';
 
     if (isSignedIn && !inAuthGroup) {
-      router.replace('/(auth)/(tabs)/today/');
-    } else if (!isSignedIn && pathName === '/') {
+      router.replace('/(auth)/(tabs)/today');
+    } else if (!isSignedIn && pathname !== '/') {
       router.replace('/');
     }
-  }, [isLoaded, isSignedIn]);
+  }, [isSignedIn]);
 
   if (!isLoaded) {
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size='large' color={Colors.primary} />
-    </View>;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size='large' color={Colors.primary} />
+      </View>
+    );
   }
-
   return (
     <Stack
       screenOptions={{
