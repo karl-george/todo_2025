@@ -4,17 +4,37 @@ export default function TabLayout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name='index'
+        name='today'
         options={{
-          title: 'Home',
-          tabBarIcon: () => ({ sfSymbol: 'house' }),
+          title: 'Today',
+          tabBarIcon: ({ focused }) => ({
+            sfSymbol: focused ? 'calendar.circle.fill' : 'calendar.circle',
+          }),
         }}
       />
       <Tabs.Screen
-        name='explore'
+        name='upcoming'
         options={{
-          title: 'Explore',
-          tabBarIcon: () => ({ sfSymbol: 'person' }),
+          title: 'Upcoming',
+          tabBarIcon: () => ({ sfSymbol: 'calendar' }),
+        }}
+      />
+      <Tabs.Screen
+        name='search'
+        options={{
+          title: 'Search',
+          tabBarIcon: ({ focused }) => ({
+            sfSymbol: focused ? 'text.magnifyingglass' : 'magnifyingglass',
+          }),
+        }}
+      />
+      <Tabs.Screen
+        name='browse'
+        options={{
+          title: 'Browse',
+          tabBarIcon: ({ focused }) => ({
+            sfSymbol: focused ? 'doc.text.image.fill' : 'doc.text.image',
+          }),
         }}
       />
     </Tabs>
